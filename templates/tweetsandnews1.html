@@ -1,0 +1,163 @@
+{% extends 'layout.html' %}
+{%block content%}
+<!-- PAGE CONTAINER-->
+<div class="page-container">
+    <!--SEARCH SECTION-->
+    <centre>
+        <p class="fontfam">Enter Ticker Symbol </p>
+    </centre>
+    <form action="{{url_for('getTweets')}}" class="search-bar" method='POST'>
+        <input type="search" name="search" pattern=".*\S.*" required onkeyup="this.value = this.value.toUpperCase();">
+        <button class="search-btn" type="submit">
+            <span>Search</span>
+        </button>
+    </form>
+    <!--END SEARCH SECTION--> 
+    <!-- MAIN CONTENT-->
+    <div class="main-content">
+        <div class="section__content section__content--p30">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="au-card au-card--no-shadow au-card--no-pad m-b-40">
+                        <div class="au-card-title" style="background-image:url('images/bg-title-01.jpg');">
+                            <div class="bg-overlay bg-overlay--blue"></div>
+                            <h3>
+                                <i class="zmdi zmdi-twitter"></i>CURRENT TWEETS AND NEWS {{symbol}}</h3>
+                            </div>
+                            <div class="au-task js-list-load">
+                                <div class="au-task-list js-scrollbar3">
+                                    {%if flag%}
+                                    {%for i in range(0,10)%}
+                                    {%if i%2==0%}
+                                    <div class="au-task__item au-task__item--primary">
+                                        {%else%}
+                                        <div class="au-task__item au-task__item--success">
+                                            {%endif%}
+                                            <div class="au-task__item-inner">
+                                                <h6 class="task">
+                                                    <p style="color: darksalmon;">{{tw_list[i]}}</p>
+                                                </h6>
+                                            </div>
+                                        </div>
+                                            {%endfor%}
+                                            {%else%}           
+                                            <div class="au-task__item au-task__item--primary">
+                                                <div class="au-task__item-inner">
+                                                    <h6 class="task">
+                                                        <p style="color: darksalmon;">tweet1</p>
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                            <div class="au-task__item au-task__item--success">
+                                                <div class="au-task__item-inner">
+                                                    <h6 class="task">
+                                                        <p style="color: darksalmon;">tweet 2</p>
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                            <div class="au-task__item au-task__item--primary">
+                                                <div class="au-task__item-inner">
+                                                    <h6 class="task">
+                                                        <p style="color: darksalmon;">tweet 3</p>
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                            <div class="au-task__item au-task__item--success">
+                                                <div class="au-task__item-inner">
+                                                    <h6 class="task">
+                                                        <p style="color: darksalmon;">tweet 4</p>
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                            <div class="au-task__item au-task__item--primary">
+                                                <div class="au-task__item-inner">
+                                                    <h6 class="task">
+                                                        <p style="color: darksalmon;">tweet 5</p>
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                            <div class="au-task__item au-task__item--primary">
+                                                <div class="au-task__item-inner">
+                                                    <h6 class="task">
+                                                        <p style="color: darksalmon;">tweet 6</p>
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                            <div class="au-task__item au-task__item--success">
+                                                <div class="au-task__item-inner">
+                                                    <h6 class="task">
+                                                        <p style="color: darksalmon;">tweet 7</p>
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                            <div class="au-task__item au-task__item--primary">
+                                                <div class="au-task__item-inner">
+                                                    <h6 class="task">
+                                                        <p style="color: darksalmon;">tweet 8</p>
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                            <div class="au-task__item au-task__item--success">
+                                                <div class="au-task__item-inner">
+                                                    <h6 class="task">
+                                                        <p style="color: darksalmon;">tweet 9</p>
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                            <div class="au-task__item au-task__item--primary">
+                                                <div class="au-task__item-inner">
+                                                    <h6 class="task">
+                                                        <p style="color: darksalmon;">tweet 10</p>
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                            {%endif%}          
+                                        </div>
+                                        <!-- <div class="au-task__footer">
+                                            <button class="au-btn au-btn-load js-load-btn">load more(IS OPTIONAL)</button>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="au-card m-b-30">
+                                        <div class="au-card-inner">
+                                            <h3 class="title-2 m-b-40">Sentimet Analysis for tweets</h3>
+                                            {%if flag%}
+                                                <img src="{{url_for('static',filename='SA_'+symbol+'.png')}}">
+                                            {%else%}
+                                                <canvas id="pieChart"></canvas>
+                                            {%endif%}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            Overall Tweets Polarity
+                                        </div>
+                                        <div class="card-body">
+                                            {%if flag%}
+                                                <p class="card-text">{{tw_pol}}</p>
+                                            {%else%}
+                                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                            {%endif%}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END MAIN CONTENT-->
+            <!-- END PAGE CONTAINER-->
+        </div>
+        {%endblock content%}
+        <!-- end document-->
+        

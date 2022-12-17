@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+{%block content%}
+
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            
+             <!-- MAIN CONTENT-->
+             <div class="main-content">
+                
+                <form action="http://stocksdemo.herokuapp.com" target="myFrame">
+                    <div class="au-task__footer">
+                        <button class="au-btn au-btn-load js-load-btn">Get stock updated to current second</button>
+                    </div>
+                </form>
+                
+                <iframe src="" name="myFrame" frameBorder="0"></iframe>
+             </div>
+             <!-- END MAIN CONTENT-->
+             <!-- END PAGE CONTAINER-->
+         </div>
+    </div>
+
+{%endblock content%}

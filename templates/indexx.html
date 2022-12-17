@@ -1,0 +1,157 @@
+{% extends 'layout.html' %}
+{%block content%}
+    
+
+       <!-- PAGE CONTAINER-->
+       <div class="page-container">
+        <!--SEARCH SECTION-->
+                 <centre>
+                     <p class="fontfam">Enter Ticker Symbol </p>
+                 </centre>
+         <form class="search-bar" action = "{{ url_for('getSymbol') }}" method = "POST">
+             <input type="search" name="search" pattern=".*\S.*" required onkeyup="this.value = this.value.toUpperCase();">
+             <button class="search-btn" type="submit">
+                 <span>Search</span>
+             </button>
+         </form>
+         <!--END SEARCH SECTION--> 
+         <!-- MAIN CONTENT-->
+         
+         <div class="main-content">
+             <div class="section__content section__content--p30">
+                 <div class="container-fluid">
+                     <div class="row">
+                         <div class="col-md-12">
+                             <div class="overview-wrap">
+                                 <h2 class="title-1">OCHL {{symbol}}</h2>
+                             </div>
+                         </div>
+                     </div>
+                     <div class="row m-t-25">
+                         <div class="col-sm-6 col-lg-3" style="margin-left: 15%;">
+                             <div class="overview-item overview-item--c1">
+                                 <div class="overview__inner">
+                                     <div class="overview-box clearfix">
+                                         <div class="text">
+                                            {% if open %}
+                                                <h2>{{open}}</h2>
+                                            {%else%}
+                                                <h2>--</h2>
+                                            {%endif%}
+                                             <span>OPEN</span>
+                                         </div>
+                                     </div>
+ 
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="col-sm-6 col-lg-3">
+                             <div class="overview-item overview-item--c2">
+                                 <div class="overview__inner">
+                                     <div class="overview-box clearfix">
+                                         <div class="text">
+                                            {%if close%}
+                                                <h2>{{close}}</h2>
+                                            {%else%}
+                                                <h2>--</h2>
+                                            {%endif%}
+                                             <span>CLOSE</span>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="col-sm-6 col-lg-3">
+                             <div class="overview-item overview-item--c3">
+                                 <div class="overview__inner">
+                                     <div class="overview-box clearfix">
+                                         <div class="text">
+                                            {%if close%}
+                                                <h2>{{high}}</h2>
+                                            {%else%}
+                                                <h2>--</h2>
+                                            {%endif%}
+                                             <span>HIGH</span>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                         
+                     </div>
+
+                     <div class="row m-t-25">
+                        <div class="col-sm-6 col-lg-3" style="margin-left: 25%;">
+                            <div class="overview-item overview-item--c4">
+                                <div class="overview__inner">
+                                    <div class="overview-box clearfix">
+                                        <div class="text">
+                                           {%if close%}
+                                               <h2>{{low}}</h2>
+                                           {%else%}
+                                               <h2>--</h2>
+                                           {%endif%}
+                                            <span>LOW</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="overview-item overview-item--c1">
+                                <div class="overview__inner">
+                                    <div class="overview-box clearfix">
+                                        <div class="text">
+                                            {%if close%}
+                                                <h2>{{volume}}</h2>
+                                            {%else%}
+                                                <h2>--</h2>
+                                            {%endif%}
+                                            <span>VOLUME</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+     
+                     </div>
+
+
+                     
+                    
+
+
+
+                     <div class="row">
+                         <div class="col-lg-12">
+                             <div class="au-card recent-report">
+                                 <div class="au-card-inner">
+                                     <h3 class="title-2">RECENT TRENDS IN STOCK</h3>
+                                     <div class="chart-info">
+                                         <div class="chart-info__right">
+                                         </div>
+                                     </div>
+                                     <div class="recent-report__chart">
+                                         {%if flag %}
+                                            <img src="{{url_for('static', filename='trend_'+symbol+'.png')}}" />
+                                        {%else%}   
+                                            <canvas id="recent-rep-chart"></canvas>
+                                        {%endif%}
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+
+                         
+                     </div>
+                 </div>
+             </div>
+         </div>
+         <!-- END MAIN CONTENT-->
+         <!-- END PAGE CONTAINER-->
+     </div>
+
+{%endblock content%}
+<!-- end document-->

@@ -1,0 +1,200 @@
+{% extends 'layout.html' %}
+{%block content%}
+<!-- PAGE CONTAINER-->
+<div class="page-container">
+    <!--SEARCH SECTION-->
+    <centre>
+        <p class="fontfam">Enter Ticker Symbol </p>
+    </centre>
+    <form action="{{url_for('predictSymbol')}}" class="search-bar" method="POST">
+        <input type="search" name="search" pattern=".*\S.*" required onkeyup="this.value = this.value.toUpperCase();">
+        <button class="search-btn" type="submit">
+            <span>Search</span>
+        </button>
+    </form>
+    <!--END SEARCH SECTION--> 
+    <!-- MAIN CONTENT-->
+    <div class="main-content">
+        <div class="section__content section__content--p30">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="au-card au-card--no-shadow au-card--no-pad m-b-40">
+                        <div class="au-card-title" style="background-image:url('https://media.gettyimages.com/photos/stock-market-data-with-uptrend-vector-picture-id482730527');">
+                            <div class="bg-overlay bg-overlay--blue"></div>
+                            <h3>
+                                <i class="zmdi zmdi-trending-up"></i>Predicted closing price</h3>
+                            </div>
+                            <div class="au-task js-list-load">
+                                
+                                <div class="au-task-list js-scrollbar3">
+                                    
+                                    
+                                    <div class="au-task__item au-task__item--danger">
+                                        <div class="au-task__item-inner">
+                                            <h6 class="task">
+                                                {% if results|length >0 %}
+                                                <p style="color: darksalmon;">{{results[0][0]}}</p>
+                                                {%else%}
+                                                <p style="color: darksalmon;">CLosing Price day 1</p>
+                                                {%endif%}
+                                            </h6>
+                                        </div>
+                                    </div>
+                                    <div class="au-task__item au-task__item--warning">
+                                        <div class="au-task__item-inner">
+                                            <h6 class="task">
+                                                {% if results|length >0 %}
+                                                <p style="color: darksalmon;">{{results[1][0]}}</p>
+                                                {%else%}
+                                                <p style="color: darksalmon;">CLosing Price day 2</p>
+                                                {%endif%}
+                                            </h6>
+                                        </div>
+                                    </div>
+                                    <div class="au-task__item au-task__item--danger">
+                                        <div class="au-task__item-inner">
+                                            <h6 class="task">
+                                                {% if results|length >0 %}
+                                                <p style="color: darksalmon;">{{results[2][0]}}</p>
+                                                {%else%}
+                                                <p style="color: darksalmon;">CLosing Price day 3</p>
+                                                {%endif%}
+                                            </h6>
+                                        </div>
+                                    </div>
+                                    <div class="au-task__item au-task__item--warning">
+                                        <div class="au-task__item-inner">
+                                            <h6 class="task">
+                                                {% if results|length >0 %}
+                                                <p style="color: darksalmon;">{{results[3][0]}}</p>
+                                                {%else%}
+                                                <p style="color: darksalmon;">CLosing Price day 4</p>
+                                                {%endif%}
+                                            </h6>
+                                        </div>
+                                    </div>
+                                    <div class="au-task__item au-task__item--danger">
+                                        <div class="au-task__item-inner">
+                                            <h6 class="task">
+                                                {% if results|length >0 %}
+                                                <p style="color: darksalmon;">{{results[4][0]}}</p>
+                                                {%else%}
+                                                <p style="color: darksalmon;">CLosing Price day 5</p>
+                                                {%endif%}
+                                            </h6>
+                                        </div>
+                                    </div>
+                                    <div class="au-task__item au-task__item--warning">
+                                        <div class="au-task__item-inner">
+                                            <h6 class="task">
+                                                {% if results|length >0 %}
+                                                <p style="color: darksalmon;">{{results[5][0]}}</p>
+                                                {%else%}
+                                                <p style="color: darksalmon;">CLosing Price day 6</p>
+                                                {%endif%}
+                                            </h6>
+                                        </div>
+                                    </div>
+                                    <div class="au-task__item au-task__item--danger">
+                                        <div class="au-task__item-inner">
+                                            <h6 class="task">
+                                                {% if results|length >0 %}
+                                                <p style="color: darksalmon;">{{results[6][0]}}</p>
+                                                {%else%}
+                                                <p style="color: darksalmon;">CLosing Price day 7</p>
+                                                {%endif%}
+                                            </h6>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-sm-12 col-lg-6" style="margin-top: 15%;">
+                        <div class="row-lg-6">
+                            <div class="overview-item overview-item--c3">
+                                <div class="overview__inner">
+                                    <div class="overview-box clearfix">
+                                        <div class="text">
+                                            {%if flag%}
+                                            <h2>{{results[0][0]}}</h2>
+                                            {%else%}
+                                            <h2>--</h2>
+                                            {%endif%}
+                                            <span>Tomorrow's closing price</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="row-lg-6">
+                            <div class="overview-item overview-item--c4" style="height: 20%;">
+                                <div class="overview__inner">
+                                    <div class="overview-box clearfix">
+                                        <div class="text">
+                                            <h2>{{decision}}</h2>
+                                            <span>Recommendation</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                
+                <div class="au-card recent-report">
+                    <div class="au-card-inner">
+                        <h3 class="title-2">MODEL ACCURACY CHART GOES HERE</h3>
+                        <div class="chart-info">
+                            <div class="chart-info__right">
+                            </div>
+                        </div>
+                        <div class="recent-report__chart">
+                            {%if flag %}
+                            <img src="{{url_for('static', filename='acc_'+symbol+'.png')}}" />
+                            {%else%}
+                            <canvas id="recent-rep-chart"></canvas>
+                            {%endif%}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row" style="margin-left: 30%;">
+                    <div class="col-sm-6 col-lg-6">
+                        <div class="overview-item overview-item--c2">
+                            <div class="overview__inner">
+                                <div class="overview-box clearfix">
+                                    <div class="text">
+                                        {%if flag%}
+                                        <h2>{{rmse}}</h2>
+                                        {%else%}
+                                        <h2>--</h2>
+                                        {%endif%}
+                                        <span>Model RMSE</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+    <!-- END MAIN CONTENT-->
+    <!-- END PAGE CONTAINER-->
+</div>
+
+{%endblock content%}
